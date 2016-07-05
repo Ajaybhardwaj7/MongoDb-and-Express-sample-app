@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <% include partials/head.ejs %>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p>This example is used to demonstrate the basic understanding of express and MonGo DB. The user submits the form which is stored in the Database and when<br/> user refreshes the page it fetches the stored quotes from the DB and serves it to the user.</p>
+    	
+    	<div>Quotes</div>
+    	<ul>
+    	<% for(var i=0; i < results.length ; i++){
+    		%> <li> 
+    				<span class='name'> <%= results[i].name %> </span><br/>
+    				<span class='quote'><%= results[i].quote %> </span>
+
+    	<%	} %>
+    	</ul>
+		<form action="/" method="POST">
+			<input type="text" placeholder="name" name="name">
+			<input type="text" placeholder="quote" name="quote"><br/><br/>
+			<button type="submit">Submit</button>
+		</form>
+    <% include partials/footer.ejs %>
+  </body>
+</html>
