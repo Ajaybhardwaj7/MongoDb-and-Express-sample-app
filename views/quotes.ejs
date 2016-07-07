@@ -11,7 +11,7 @@
 		collection.update({mykey : 1} , {$set : { fieldset : 3}} , {w:1} , function(err , result){});
 		collection.remove({abc2 : 'sample2'} , {w:1} , function(err ,result){});
 	%>
-	<h1>Retreiving data from collection</h1>
+	
 	<%      var result;
 			var stream = collection.find({mykey : 1}).stream();
 			stream.on('data' , function(data){ result += data});
