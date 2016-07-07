@@ -5,23 +5,26 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>This example is used to demonstrate the basic understanding of express and MonGo DB. The user submits the form which is stored in the Database and when<br/> user refreshes the page it fetches the stored quotes from the DB and serves it to the user.</p>
+    <p>Welcome to <%= title %>.</p>
+    <p>This example is used to demonstrate the basic understanding of express and MonGo DB. The user submits the form which is stored <br/>in the Database and when user refreshes the page it fetches the stored quotes from the DB and serves it to the user.</p>
     	
-    	<div>Quotes</div>
+    	<div><i>Quotes</i></div>
     	<ul>
     	<% for(var i=0; i < results.length ; i++){
     		%> <li> 
-    				<span class='name'> <%= results[i].name %> </span><br/>
+    				<span class='name'> <b><%= results[i].name %> : </b></span><br/>
     				<span class='quote'><%= results[i].quote %> </span>
-
-    	<%	} %>
+    			</li><br/>
+    	<% 	} %>
     	</ul>
 		<form action="/" method="POST">
-			<input type="text" placeholder="name" name="name">
-			<input type="text" placeholder="quote" name="quote"><br/><br/>
+			<input type="text" placeholder="name" name="name" min=3>
+			<input type="text" placeholder="quote" name="quote" min=10><br/><br/>
 			<button type="submit">Submit</button>
 		</form>
+		<br/>
+		<br/>
+		<div><a href='/recent'>Perform other Mongo DB operations</a></div>
     <% include partials/footer.ejs %>
   </body>
 </html>

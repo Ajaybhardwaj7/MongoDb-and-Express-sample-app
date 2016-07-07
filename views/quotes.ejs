@@ -1,0 +1,33 @@
+<div>
+	<h1>Perform DB operations</h1>
+	
+	<%
+		var collection = db.collection('sampleCollection' , function(err , collection){});
+
+		collection.insert({abc2 : "sample2"} ,{w:1} , function(err , result) { });
+
+		collection.insert({mykey : 1 , fieldset : 1 } , {w:1} , function(err , result){});
+
+		collection.update({mykey : 1} , {$set : { fieldset : 3}} , {w:1} , function(err , result){});
+		collection.remove({abc2 : 'sample2'} , {w:1} , function(err ,result){});
+	%>
+	<h1>Retreiving data from collection</h1>
+	<%      var result;
+			var stream = collection.find({mykey : 1}).stream();
+			stream.on('data' , function(data){ result += data});
+			stream.on('end' , function(){ console.log(JSON.stringify(result))});
+	 %>
+
+	<div>All Queries</div>
+	<b>Create Collection</b>
+	<p>var collection = db.collection('sampleCollection' , function(err , collection){});</p>
+	<b>Insert</b>
+	<p>collection.insert({abc2 : "sample2"} ,{w:1} , function(err , result) { }); <br/>
+	collection.insert({mykey : 1 , fieldset : 1 } , {w:1} , function(err , result){});
+	</p>
+
+	<b>Update</b>
+	<p>collection.update({mykey : 1} , {$set : { fieldset : 3}} , {w:1} , function(err , result){});</p>
+	<b>Remove</b>
+	<p>collection.remove({abc2 : sample2} , {w:1} , function(err ,result){});</p>
+</div>

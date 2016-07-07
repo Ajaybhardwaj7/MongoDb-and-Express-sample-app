@@ -13,16 +13,18 @@ var logger = require('../logger');
 		  	res.render('index' , { 'results' : results , 'title' : 'Express and MongoDB'});
 		  	
 		  })
-		  
-		 // res.render('index', { title: 'Express' });
+		 
 		});
 		router.post('/', function(req, res, next) {
 			db.collection('quotes').save(req.body , function(err , result){
 				  if (err) return logger.info(err);
 
     			res.redirect('/');
-		});
+			});
 
-	});
+		});
+		router.get('/recent', function(req, res, next) {
+			res.render('quotes' );
+      });
 
 module.exports = router;

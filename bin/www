@@ -8,8 +8,8 @@ var app = require('../app');
 //var debug = require('debug')('express-generator:server');
 var http = require('http');
 var winston = require('winston');
-//var mongoClient = require('mongodb').MongoClient;
-var mongoose = require('mongoose');
+var MongoClient = require('mongodb').MongoClient;
+//var mongoose = require('mongoose');
 var logger = require('../logger');
 /**
  * Get port from environment and store in Express.
@@ -18,10 +18,10 @@ var logger = require('../logger');
 
 
 
-mongoose.connect('mongodb://localhost:27017/sampleDB');
+//mongoose.connect('mongodb://localhost:27017/sampleDB');
 //mongoose.connect('mongodb://ajaybhardwaj7:baadshah8@ds021994.mlab.com:21994/sample');
 
-db = mongoose.connection;
+/*db = mongoose.connection;
 
 db.on('error', function(err){
     logger.info('Error while connecting database', err)
@@ -42,9 +42,23 @@ db.on('open', function () {
 });
 db.on('disconnected', function(err){
     logger.info('Database Connection disconnected.')
+});*/
+
+MongoClient.connect('mongodb://localhost:27017/sampleDB' , function(err , dbinstance){
+  if(err) throw logger.log(err);
+  db = dbinstance;
+  logger.info('Database Connection established.');
+   
+    var port = normalizePort(process.env.PORT || '3000');
+    app.set('port', port);
+  
+    server = http.createServer(app);
+
+    server.listen(port , function(){
+      onListening();
+    });
+    server.on('error', onError);
 });
-
-
 /**
  * Normalize a port into a number, string, or false.
  */
